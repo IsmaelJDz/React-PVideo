@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import './media.css';
+import { throws } from 'assert';
 
 class Media extends PureComponent {
 
@@ -19,13 +20,14 @@ class Media extends PureComponent {
   //   //this.handleClick = this.handleClick.bind(this);
   // }
 
-  // handleClick = () => {
-  //   //console.log(this.props.author)
-  //   this.setState({
-  //     author: 'Isma :)'
-  //   })
-
-  // }
+  handleClick = (event) => {
+    //console.log(this.props.author)
+    // this.setState({
+    //   author: 'Isma :)'
+    // })
+    this.props.openModal(this.props);
+    
+  }
 
   render(){
 
@@ -41,7 +43,7 @@ class Media extends PureComponent {
     // }
 
     return(
-      <div className="Media" onClick={this.props.handleClick}>
+      <div className="Media" onClick={this.handleClick}>
         <div className="Media-cover">
           <img 
             src={cover}
