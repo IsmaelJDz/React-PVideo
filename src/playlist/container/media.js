@@ -33,6 +33,18 @@ const mapStateToProps = (state, OwnProps) => {
   }
 }
 
+// existe un shorthand donde no es necesario importar bindAnctionCreators, 
+// consiste en que mapDispatchToProps sea un objeto en vez de una 
+// funcion y recibe las acciones como propiedades asi podran ser usadas directamente 
+// en los props del componente.
+
+
+// import { openModal, closeModal } from '.../../actions/index';
+// const mapDispatchToProps = {
+// 	openModal,
+// 	closeModal,
+// }
+
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     actions: bindActionCreators( actions, dispatch )

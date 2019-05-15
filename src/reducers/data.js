@@ -1,5 +1,6 @@
 import schema from '../schemas/index';
 import { fromJS } from 'immutable';
+import { SEARCH_AUTHOR } from '../action-types/index';
 
 const initialState = fromJS({
   //reducer 1
@@ -13,7 +14,7 @@ const initialState = fromJS({
 const data = (state = initialState, action) => {
   switch (action.type) {
     //action.payload.query
-    case 'SEARCH_AUTHOR': {
+    case SEARCH_AUTHOR: {
       //const results = []
       // if (action.payload.query) {
       //   //const list = state.data.categories[2].playlist;
