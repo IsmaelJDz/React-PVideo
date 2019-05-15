@@ -13,7 +13,7 @@ const initialState = fromJS({
 const data = (state = initialState, action) => {
   switch (action.type) {
     //action.payload.query
-    case 'SEARCH_VIDEO': {
+    case 'SEARCH_AUTHOR': {
       //const results = []
       // if (action.payload.query) {
       //   //const list = state.data.categories[2].playlist;

@@ -8,24 +8,40 @@ import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux';
 import { List as list } from 'immutable';
+import * as actions from '../../actions/index';
+import { bindActionCreators } from 'redux';
 
 class Home extends Component {
 
-  state = {
-    modalVisible: false,
-  }
+  // state = {
+  //   modalVisible: false,
+  // }
 
-  handleOpenModal = (media) => {
-    this.setState({
-      modalVisible: true,
-      media
-    })
+  handleOpenModal = (id) => {
+    // this.setState({
+    //   modalVisible: true,
+    //   media
+    // })
+    //----- Esto se paso a un archibo creador de acciones, basicamente mandarlo a una funcion
+    // this.props.dispatch({
+    //   type: 'OPEN_MODAL',
+    //   payload: {
+    //     mediaId: id  
+    //   } 
+    // })
+    this.props.actions.openModal(id)
   }
 
   handleCloseModal = (event) => {
-    this.setState({
-      modalVisible: false,
-    }) 
+    //esto se hacia cuando no usabamos redux
+    // this.setState({
+    //   modalVisible: false,
+    // }) 
+    // this.props.dispatch({
+    //   type: 'CLOSE_MODAL'
+    // })
+
+    this.props.actions.closeModal()
   }
 
   // componentDidCatch(error, info) {
@@ -50,13 +66,14 @@ class Home extends Component {
             search={this.props.search}
           />
           {
-            this.state.modalVisible &&
+            this.props.modal.get('visibility') &&
             <ModalContainer>
               <Modal handleClick={this.handleCloseModal}>
                 <VideoPlayer 
                   autoplay={false}
-                  src={this.state.media.src}
-                  title={this.state.media.title}
+                  id={this.props.modal.get('mediaId') }
+                  //src={this.state.media.src}
+                  //title={this.state.media.title}
                 />
                 <h1>Esto es un portal</h1>
               </Modal>
@@ -89,9 +106,17 @@ function mapStateToProps(state, props) {
     // con ES6 podriamos solo dejarlo en categories al ser igual tanto la key como el valor
     categories: categories,
     //search: state.get('data').get('search')
-    search: searchResults
+    search: searchResults,
     //search: state.getIn(['data', 'search'])
+    modal: state.get('modal')
   }
 }
 
-export default connect(mapStateToProps)(Home)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    actions: bindActionCreators( actions, dispatch )
+  }
+}
+
+//connect recibe mas de 1 un parametro, recibe 4, el segundo es una funcion que recibe el dispatch
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
