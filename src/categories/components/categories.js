@@ -11,16 +11,17 @@ function Categories(props) {
       {
         props.search.map((item) => {
           return <Media
-            key={item.id}
-            {...item} />
+            key={item.get('id')}
+            // toJS para convertir a objetos planos de javascript de un mapa
+            {...item.toJS()} />
         })
       }
       {
         props.categories.map((item)=>{
           return (
             <Category 
-              key={item.id} 
-              {...item} 
+              key={item.get('id')} 
+              {...item.toJS()} 
               handleOpenModal={props.handleOpenModal}
             />
           )

@@ -7,6 +7,7 @@ import Modal from '../../widgets/components/modal';
 import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux';
+import { List as list } from 'immutable';
 
 class Home extends Component {
 
@@ -68,10 +69,28 @@ class Home extends Component {
 
 }
 
-function mapStateToProps (state, props) {
+function mapStateToProps(state, props) {
+  const categories = state.get('data').get('categories').map((categoryId) => {
+    return state.get('data').get('entities').get('categories').get(categoryId)
+  })
+  let searchResults = list()
+  const search = state.get('data').get('search') 
+
+  if(search) {
+    //Esto va a devolver una lista de mis elementos de media y iterar para encontrar el autor
+    const mediaList = state.get('data').get('entities').get('media')
+    // Esto devuelve un nuevo mapa, los mapas son objetos, para iterarlos y ponerlos en el DOM es mejor con una lista
+    searchResults = mediaList.filter((item) => {
+      return item.get('author').toLowerCase().includes(search.toLowerCase())
+    }).toList();
+  }
+
   return {
-    categories: state.data.categories,
-    search: state.search,
+    // con ES6 podriamos solo dejarlo en categories al ser igual tanto la key como el valor
+    categories: categories,
+    //search: state.get('data').get('search')
+    search: searchResults
+    //search: state.getIn(['data', 'search'])
   }
 }
 
