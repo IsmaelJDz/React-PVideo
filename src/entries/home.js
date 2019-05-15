@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import reducer from '../reducers/index';
 import { Map as map } from 'immutable';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // const initialState = {
@@ -81,7 +82,7 @@ const store = createStore(
   map(),
   composeWithDevTools(
     //si queremos multiples middlewares en logger ponemos una " , " y ponemo el nombre del otro middleware
-    applyMiddleware(logger)
+    applyMiddleware(logger, thunk)
   )
   //Este es un Midleware, es un enhacer que es una funcion que va a interceptar todas las acciones y
   // hacer algunas modificaciones.

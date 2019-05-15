@@ -22,7 +22,9 @@ class SearchContainer extends Component {
       //   query: this.input.value,
       // }
     //})
-    this.props.actions.searchAuthor(this.input.value)
+    //Manera sencilla
+    //fetch(`https://miapi.com/buscar/${this.input.value}).then((data) => {})`)
+    this.props.actions.searchAsyncAuthor(this.input.value)
   }
 
   setInputRef = element => {

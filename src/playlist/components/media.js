@@ -52,9 +52,9 @@ class Media extends PureComponent {
             height={160}  
             className="Media-image"      
           />
-          <h3 className="Media-title">{title}</h3>
-          <p className="Media-author">{this.state.author}</p>
         </div>
+        <h3 className="Media-title">{title}</h3>
+        <p className="Media-author">{this.state.author}</p>
       </div>
     )
   }

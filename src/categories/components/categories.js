@@ -8,6 +8,10 @@ function Categories(props) {
   return (
     <div className="Categories">
       <Search />
+      { 
+        props.isLoading &&
+        <p>Buscando tus videos favoritos... 🔎</p>
+      }
       {
         props.search.map((item) => {
           //Esta seria la opcion mas correcta ya que no se recomienda usar el toJS
